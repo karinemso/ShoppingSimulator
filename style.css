@@ -61,8 +61,8 @@ main {
 .dec, .inc {
 	background: black;
 	color: white;
-	width: 4vh;
-	height: 2vw;
+	width: 3vw;
+	height: 2vh;
 	border: none;
 	border-radius: 10px;
 }

@@ -9,8 +9,7 @@ let clear = document.querySelector(".clear")
 let innerPrice = price.innerText
 console.log(btnAdd)
 
-
-if (localStorage) {
+if (localStorage.length >= 1) {
     var armazenamento = localStorage.getItem('preco')
     priceInput.value = armazenamento
     priceInput.disabled = true
