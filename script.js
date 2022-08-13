@@ -5,20 +5,37 @@ let price = document.querySelector(".result")
 let qtd = document.querySelector(".qtd")
 let qtdVal = parseInt(qtd.innerText)
 let btnAdd = document.querySelector(".add")
+let clear = document.querySelector(".clear")
 let innerPrice = price.innerText
 console.log(btnAdd)
 
+
+if (localStorage) {
+    var armazenamento = localStorage.getItem('preco')
+    priceInput.value = armazenamento
+    priceInput.disabled = true
+    let res = parseFloat(armazenamento * qtdVal)
+    let finalResult = res.toLocaleString('pt-BR', {style: 'currency', currency:'BRL', currencyDisplay:'symbol'}) 
+    price.innerText = finalResult
+
+  }
+
+
 function submit(){
-  let priceNumber = parseFloat(priceInput.value)
-  
+  let priceNumber = priceInput.value
+  localStorage.setItem('preco', priceInput.value);
   price.textContent = priceNumber
   priceInput.disabled = true
+  localStorage.getItem('preco')
 
   if (qtdVal>=1) {
     let res = parseFloat(priceNumber * qtdVal)
     let finalResult = res.toLocaleString('pt-BR', {style: 'currency', currency:'BRL', currencyDisplay:'symbol'}) 
     price.innerText = finalResult
   }
+  
+
+  
 }
 
 function increase() {
@@ -32,6 +49,7 @@ function increase() {
         let res = parseFloat(priceNumber * qtdVal)
         let finalResult = res.toLocaleString('pt-BR', {style: 'currency', currency:'BRL', currencyDisplay:'symbol'}) 
         price.innerText = finalResult
+        priceInput.disabled = true
       }
 }
 
@@ -50,7 +68,17 @@ function decrease() {
   price.innerText = finalResult
 }
 
+function clearAll() {
+  localStorage.clear()
+  priceInput.disabled = false
+  priceInput.value = ""
+   price.innerText = "0"
 
+}
+
+
+console.log(localStorage)
 btnAdd.addEventListener('click',submit)
 inc.addEventListener('click', increase)
 dec.addEventListener('click', decrease)
+clear.addEventListener('click', clearAll)
